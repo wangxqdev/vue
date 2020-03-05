@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h2 v-bind:style="{color: finalColor}">Hello, {{message}}</h2>
+    <h2 v-bind:style="getStyles()">Hello, {{message}}</h2>
+    <ul>
+      <li v-for="(item, index) in books" @click="render(index)" :style="{color: item.color}">{{item.name}}</li>
+    </ul>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Vue.js",
+        finalColor: '#f00',
+        books: [{ id: "1", name: "Java开发详解", price: 109.5, color: "#000" },
+        { id: "2", name: "Java编程思想", price: 89.1, color: "#000" },
+        { id: "3", name: "零基础学Java", price: 64.2, color: "#000" },
+        { id: "4", name: "Java核心技术", price: 109.3, color: "#000" }]
+      },
+      methods: {
+        getStyles: function () {
+          return { color: this.finalColor };
+        },
+        render: function (index) {
+            this.books.forEach(e => e.color = "#000");
+            this.books[index].color = "#f00";
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

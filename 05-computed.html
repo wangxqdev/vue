@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h2>{{fullName}}</h2>
+    <h2>总价格: {{totalPrice}}</h2>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        firstName: "王",
+        lastName: "欣泉",
+        books: [{ id: "1", name: "Java开发详解", price: 109.5 },
+        { id: "2", name: "Java编程思想", price: 89.1 },
+        { id: "3", name: "零基础学Java", price: 64.2 },
+        { id: "4", name: "Java核心技术", price: 109.3 }]
+      },
+      computed: {
+        // 语法糖
+        // fullName: function () {
+        //   return this.firstName + " " + this.lastName;
+        // },
+        fullName: {
+          set: function(newValue) {
+            const names = newValue.split(" ");
+            this.firstName = names[0];
+            this.lastName = names[1];
+          },
+          get: function() {
+            return this.firstName + " " + this.lastName;
+          }
+        },
+        totalPrice: function () {
+          return this.books.reduce((total, currentValue, currentIndex, arr) => total + currentValue.price, 0);
+          // ES6语法
+          // let totalPrice = 0;
+          // for (let book of this.books) {
+          //   totalPrice += book.price;
+          // }
+          // return totalPrice;
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

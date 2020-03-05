@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- mustache -->
+    <h2>Hello, {{message}}</h2>
+    <ul>
+      <!-- v-for -->
+      <li v-for="item in movies">{{item}}</li>
+    </ul>
+    <h2>{{counter}}</h2>
+    <div>
+      <!-- v-on -->
+      <button v-on:click="increment">＋</button>
+      <button @click="decrement">－</button>
+    </div>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Vue.js",
+        movies: ["中国女排", "唐人街探案3", "囧妈"],
+        counter: 0
+      },
+      methods: {
+        increment: function () {
+          this.counter++;
+        },
+        decrement: function () {
+          this.counter--;
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
