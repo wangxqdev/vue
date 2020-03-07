@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 
+      1. 显示和隐藏切换频繁的情况下使用v-show 
+      2. 只有一次切换的情况下使用v-if
+    -->
+    <button @click="isShow = !isShow">toggle</button>
+    <h2 v-show="isShow">我要不要显示呢?</h2>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        isShow: true
+      }
+    });
+  </script>
+</body>
+
+</html>
