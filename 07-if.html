@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h2 v-if="score &lt; 60">不及格</h2>
+    <h2 v-else-if="score &lt; 80">合格</h2>
+    <h2 v-else-if="score &lt; 90">良好</h2>
+    <h2 v-else>优秀</h2>
+    <h2>{{result}}</h2>
+
+    <!-- key属性解决vue标签复用 -->
+    <span v-if="isUser">
+      <label for="username">用户账号</label>
+      <input type="text" name="" id="username" placeholder="请输入用户账号" key="usename">
+    </span>
+    <span v-else>
+      <label for="email">用户邮箱</label>
+      <input type="text" name="" id="email" placeholder="请输入用户邮箱" key="email">
+    </span>
+    <button @click="isUser = !isUser">切换类型</button>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        score: 88,
+        isUser: true
+      },
+      computed: {
+        result() {
+          let showMessage = "";
+          if (this.score < 60) {
+            showMessage = "不及格";
+          } else if (this.score < 80) {
+            showMessage = "合格";
+          } else if (this.score < 90) {
+            showMessage = "良好";
+          } else {
+            showMessage = "优秀";
+          }
+          return showMessage;
+        }
+      },
+    });
+  </script>
+</body>
+
+</html>
