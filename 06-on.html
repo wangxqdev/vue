@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 参数传递 -->
+    <button @click="btn1Click">btn1</button>
+    <button @click="btn2Click(123, $event)">btn2</button>
+
+    <!-- 修饰符 -->
+    <div @click="divClick">
+      div
+      <button @click.stop="btn3Click">btn3</button>
+    </div>
+    <form action="https://www.baidu.com/">
+      <input type="submit" value="submit" @click.prevent="submitClick">
+    </form>
+    <div>
+      <input type="text" name="" id="" @keyup.enter="keyup">
+    </div>
+    <button @click.once="btn4Click">btn4</button>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      methods: {
+        btn1Click(event) {
+          console.log("--------", event);
+        },
+        btn2Click(num, event) {
+          console.log("++++++++", num, event);
+        },
+        divClick() {
+          console.log("divClick");
+        },
+        btn3Click() {
+          console.log("btn3Click");
+        },
+        submitClick() {
+          console.log("submitClick");
+        },
+        keyup(event) {
+          console.log(event);
+        },
+        btn4Click() {
+          console.log("btn4Click");
+        }
+      },
+    });
+  </script>
+</body>
+
+</html>
