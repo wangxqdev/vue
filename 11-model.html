@@ -16,7 +16,7 @@
     </div>
 
     <!-- v-bind && event => v-model -->
-    
+
     <!-- <div>
       /* this === window */
       <input type="text" :value="message" @input="message = $event.target.value">
@@ -66,7 +66,23 @@
       </select>
       <h2>Fruits: {{fruits}}</h2>
     </div>
+
+    <!-- 修饰符 -->
+    <div>
+      <!-- lazy -->
+      <input type="text" v-model.lazy="message">
+      <h2>Lazy: {{message}}</h2>
+      
+      <!-- number -->
+      <input type="number" v-model.number="number">
+      <h2>{{number}} - {{typeof(number)}}</h2>
+
+      <!-- trim -->
+      <input type="text" v-model.trim="message">
+      <h2>Trim: {{message}}</h2>
+    </div>
   </div>
+
   <script src="./js/vue.js"></script>
   <script>
     const app = new Vue({
@@ -78,7 +94,8 @@
         hobbies: [],
         fruit: "banana",
         fruits: [],
-        originFruits: ["苹果", "香蕉", "生梨", "葡萄"]
+        originFruits: ["苹果", "香蕉", "生梨", "葡萄"],
+        number: 0
       },
       methods: {
         valueChange(event) {
