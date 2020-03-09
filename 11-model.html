@@ -61,10 +61,8 @@
       <h2>Fruit: {{fruit}}</h2>
       <!-- 多选 -->
       <select name="fruits" v-model="fruits" multiple>
-        <option value="apple">苹果</option>
-        <option value="banana">香蕉</option>
-        <option value="pear">生梨</option>
-        <option value="grape">葡萄</option>
+        <!-- 值绑定 -->
+        <option v-for="item in originFruits" :value="item">{{item}}</option>
       </select>
       <h2>Fruits: {{fruits}}</h2>
     </div>
@@ -79,7 +77,8 @@
         isAgree: false,
         hobbies: [],
         fruit: "banana",
-        fruits: ["grape"]
+        fruits: [],
+        originFruits: ["苹果", "香蕉", "生梨", "葡萄"]
       },
       methods: {
         valueChange(event) {
