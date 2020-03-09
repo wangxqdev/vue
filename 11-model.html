@@ -9,14 +9,16 @@
 
 <body>
   <div id="app">
-    <!-- v-model -->
+    <!-- text -->
     <div>
       <input type="text" v-model="message">
       <h2>Hello, {{message}}</h2>
     </div>
 
-    <!-- v-bind && event -->
+    <!-- v-bind && event => v-model -->
+    
     <!-- <div>
+      /* this === window */
       <input type="text" :value="message" @input="message = $event.target.value">
     </div> -->
 
@@ -33,7 +35,7 @@
     <div>
       <!-- 单选 -->
       <input type="checkbox" name="agree" id="agree" v-model="isAgree">
-      <label for="agree">承认</label>
+      <label for="agree">同意</label>
       <h2>Checked: {{isAgree}}</h2>
       <!-- 多选 -->
       <input type="checkbox" name="hobbies" id="football" value="football" v-model="hobbies">
@@ -46,6 +48,26 @@
       <label for="pingpong">乒乓</label>
       <h2>Hobbies: {{hobbies}}</h2>
     </div>
+
+    <!-- select -->
+    <div>
+      <!-- 单选 -->
+      <select name="fruit" v-model="fruit">
+        <option value="apple">苹果</option>
+        <option value="banana">香蕉</option>
+        <option value="pear">生梨</option>
+        <option value="grape">葡萄</option>
+      </select>
+      <h2>Fruit: {{fruit}}</h2>
+      <!-- 多选 -->
+      <select name="fruits" v-model="fruits" multiple>
+        <option value="apple">苹果</option>
+        <option value="banana">香蕉</option>
+        <option value="pear">生梨</option>
+        <option value="grape">葡萄</option>
+      </select>
+      <h2>Fruits: {{fruits}}</h2>
+    </div>
   </div>
   <script src="./js/vue.js"></script>
   <script>
@@ -55,11 +77,12 @@
         message: "Vue.js",
         sex: "男",
         isAgree: false,
-        hobbies: []
+        hobbies: [],
+        fruit: "banana",
+        fruits: ["grape"]
       },
       methods: {
         valueChange(event) {
-          /* this === window */
           this.message = event.target.value;
         }
       },
