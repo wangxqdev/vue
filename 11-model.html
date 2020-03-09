@@ -26,7 +26,25 @@
       <label for="male">男</label>
       <input type="radio" id="female" value="女" v-model="sex">
       <label for="female">女</label>
-      <h2>Selected {{sex}}</h2>
+      <h2>Selected: {{sex}}</h2>
+    </div>
+
+    <!-- checkbox -->
+    <div>
+      <!-- 单选 -->
+      <input type="checkbox" name="agree" id="agree" v-model="isAgree">
+      <label for="agree">承认</label>
+      <h2>Checked: {{isAgree}}</h2>
+      <!-- 多选 -->
+      <input type="checkbox" name="hobbies" id="football" value="football" v-model="hobbies">
+      <label for="football">足球</label>
+      <input type="checkbox" name="hobbies" id="basketball" value="basketball" v-model="hobbies">
+      <label for="basketball">篮球</label>
+      <input type="checkbox" name="hobbies" id="tennis" value="tennis" v-model="hobbies">
+      <label for="tennis">网球</label>
+      <input type="checkbox" name="hobbies" id="pingpong" value="pingpong" v-model="hobbies">
+      <label for="pingpong">乒乓</label>
+      <h2>Hobbies: {{hobbies}}</h2>
     </div>
   </div>
   <script src="./js/vue.js"></script>
@@ -35,7 +53,9 @@
       el: "#app",
       data: {
         message: "Vue.js",
-        sex: "男"
+        sex: "男",
+        isAgree: false,
+        hobbies: []
       },
       methods: {
         valueChange(event) {
