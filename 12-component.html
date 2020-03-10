@@ -12,22 +12,7 @@
     <!-- 3.使用组件 -->
     <cpn2></cpn2>
     <cpn1></cpn1>
-    <cpn3></cpn3>
   </div>
-
-  <!-- 模板分离 -->
-  <!-- <script type="text/x-templete" id="cpn3">
-    <div>
-      <h2>我是标题3</h2>
-      <p>我是内容, 嘻嘻嘻嘻</p>
-    </div>
-  </script> -->
-  <template id="cpn3">
-    <div>
-      <h2>我是标题3</h2>
-      <p>我是内容, 嘻嘻嘻嘻</p>
-    </div>
-  </template>
 
   <script src="./js/vue.js"></script>
   <script>
@@ -63,9 +48,6 @@
           <p>我是内容, 哈哈哈哈</p>
         </div>
       `
-    })
-    Vue.component("cpn3", {
-      template: "#cpn3"
     })
 
     const app = new Vue({
