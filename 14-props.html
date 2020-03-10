@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <cpn :message="message" :movies="movies"></cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <h2>Hello, {{message}}</h2>
+      <ul>
+        <li v-for="item in movies">{{item}}</li>
+      </ul>
+    </div>
+  </template>
+  <script src="./js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "Vue.js",
+        movies: ["中国女排", "唐人街探案3", "囧妈"]
+      },
+      components: {
+        cpn: {
+          template: "#cpn",
+          // props: ["message", "movies"]
+          props: {
+            // message: [String, Number],
+            // movies: Array
+            message: {
+              type: [String, Number],
+              default: "",
+              required: true
+            },
+            movies: {
+              type: Array,
+              default() {
+                return [];
+              },
+              required: false
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
