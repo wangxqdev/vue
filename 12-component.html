@@ -10,7 +10,11 @@
 <body>
   <div id="app">
     <!-- 3.使用组件 -->
-    <my-cpn></my-cpn>
+    <cpn></cpn>
+  </div>
+
+  <div id="app2">
+    <cpn></cpn>
   </div>
 
   <script src="./js/vue.js"></script>
@@ -25,12 +29,20 @@
       </div>
       `
     });
-    /* 2. 注册组件 */
-    Vue.component("my-cpn", cpnC);
+    /* 2. 注册组件(全局) */
+    // Vue.component("cpn", cpnC);
 
     const app = new Vue({
-      el: "#app"
-    }); 
+      el: "#app",
+      // 2. 注册组件(局部)
+      components: {
+        cpn: cpnC
+      }
+    });
+    
+    const app2 = new Vue({
+      el: "#app2"
+    })
   </script>
 </body>
 
