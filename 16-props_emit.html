@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <cpn :c-num1="pNum1" :c-num2="pNum2" @num1-change="num1Change" @num2-change="num2Change"></cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <h2>cNum1: {{cNum1}}</h2>
+      <h2>dNum1: {{dNum1}}</h2>
+      <input type="text" :value="dNum1" @input="num1Input">
+      
+      <h2>cNum2: {{cNum2}}</h2>
+      <h2>dNum2: {{dNum2}}</h2>
+      <input type="text" :value="dNum2" @input="num2Input">
+    </div>
+  </template>
+  <script src="./js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        pNum1: 1,
+        pNum2: 0
+      },
+      methods: {
+        num1Change(value) {
+          this.pNum1 = parseInt(value);
+        },
+        num2Change(value) {
+          this.pNum2 = parseInt(value);
+        }
+      },
+      components: {
+        cpn: {
+          template: "#cpn",
+          props: {
+            cNum1: Number,
+            cNum2: Number
+          },
+          data() {
+            return {
+              dNum1: this.cNum1,
+              dNum2: this.cNum2
+            }
+          },
+          methods: {
+            num1Input(event) {
+              this.dNum1 = event.target.value;
+              this.$emit("num1-change", this.dNum1);
+              // input2是input1的100倍
+              this.dNum2 = event.target.value * 100;
+              this.$emit("num2-change",this.dNum2);
+            },
+            num2Input(event) {
+              this.dNum2 = event.target.value;
+              this.$emit("num2-change", this.dNum2);
+              // input1是input2的1/100倍
+              this.dNum1 = event.target.value / 100;
+              this.$emit("num1-change", this.dNum1);
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
