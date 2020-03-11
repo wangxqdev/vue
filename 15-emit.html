@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 父组件模板 -->
+  <div id="app">
+    <cpn @item-click="cpnClick" @plus-one="increment" @minus-one="decrement"></cpn>
+    <h2>当前计数: {{counter}}</h2>
+  </div>
+  <!-- 子组件模板 -->
+  <template id="cpn">
+    <div>
+      <button v-for="item in categories" @click="itemClick(item)">{{item.name}}</button>
+      <div>
+        <button @click="increment">＋</button>
+        <button @click="decrement">－</button>
+      </div>
+    </div>
+  </template>
+
+  <script src="./js/vue.js"></script>
+  <script>
+    /* 父组件 */
+    const app = new Vue({
+      el: "#app",
+      data: {
+        counter: 0
+      },
+      methods: {
+        cpnClick(item) {
+          console.log(item.id);
+        },
+        increment() {
+          this.counter++;
+        },
+        decrement() {
+          this.counter--;
+        }
+      },
+      components: {
+        /* 子组件 */
+        cpn: {
+          template: "#cpn",
+          data() {
+            return {
+              categories: [
+                {
+                  id: "hwsz",
+                  name: "好味实在"
+                },
+                {
+                  id: "fywz",
+                  name: "防疫物资"
+                },
+                {
+                  id: "jxjj",
+                  name: "匠心家具"
+                },
+                {
+                  id: "sjfw",
+                  name: "手机服务"
+                }
+              ]
+            }
+          },
+          methods: {
+            itemClick(item) {
+              this.$emit("item-click", item);
+            },
+            increment() {
+              this.$emit("plus-one");
+            },
+            decrement() {
+              this.$emit("minus-one");
+            }
+          },
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

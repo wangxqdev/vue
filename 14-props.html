@@ -8,10 +8,11 @@
 </head>
 
 <body>
+  <!-- 父组件模板 -->
   <div id="app">
     <cpn :c-message="message" :c-movies="movies"></cpn>
   </div>
-
+  <!-- 子组件模板 -->
   <template id="cpn">
     <div>
       <h2>Hello, {{cMessage}}</h2>
@@ -20,6 +21,7 @@
       </ul>
     </div>
   </template>
+
   <script src="./js/vue.js"></script>
   <script>
     const app = new Vue({
