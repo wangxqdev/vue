@@ -10,19 +10,29 @@
 <body>
   <div id="app">
     <cpn></cpn>
-    <cpn><span>哈哈哈</span></cpn>
     <cpn><button slot="left">返回</button></cpn>
+    <cpn>
+      <template slot-scope="slot" slot="scope">
+        <span>{{slot.data.join(" - ")}}</span>
+      </template>
+    </cpn>
   </div>
 
   <template id="cpn">
     <div>
       <h2>我是子组件</h2>
       <!-- 插槽默认值 -->
-      <slot><button>按钮</button></slot>
+      <slot name="btn"><button>按钮</button></slot>
       <!-- 具名插槽 -->
       <slot name="left"><span>左边</span></slot>
       <slot name="center"><span>中间</span></slot>
       <slot name="right"><span>右边</span></slot>
+      <!-- 作用域插槽 -->
+      <slot :data="pLanguages" name="scope">
+        <ul>
+          <li v-for="item in pLanguages">{{item}}</li>
+        </ul>
+      </slot>
     </div>
   </template>
   <script src="./js/vue.js"></script>
@@ -31,7 +41,12 @@
       el: "#app",
       components: {
         cpn: {
-          template: "#cpn"
+          template: "#cpn",
+          data() {
+            return {
+              pLanguages: ["Java", "JavaScript", "NodeJS", "C#", "C++"]
+            }
+          }
         }
       }
     });
