@@ -73,7 +73,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 // Common JS
 // const {add, mul} = require("./math.js");
 
-// ES6
+// ES6(推荐)
 
 
 console.log(Object(__WEBPACK_IMPORTED_MODULE_0__math__["a" /* add */])(20, 30));
@@ -99,7 +99,7 @@ function mul(num1, num2) {
 //   add, mul
 // }
 
-// ES6
+// ES6(推荐)
 
 
 
