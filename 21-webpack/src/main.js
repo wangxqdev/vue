@@ -14,9 +14,20 @@ console.log(add(20, 30));
 console.log(mul(20, 30));
 document.writeln("<h2>Hello, Webpack</h2>");
 
-const app = new Vue({
+new Vue({
   el: "#app",
+  template: `
+    <div>
+      <h2>{{message}}</h2>
+      <button @click="btnClick">按钮</button>
+    </div>
+  `,
   data: {
     message: "Hello, Vue.js"
+  },
+  methods: {
+    btnClick(e) {
+      console.log(e)
+    }
   }
 });
