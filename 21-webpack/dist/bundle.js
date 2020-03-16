@@ -691,16 +691,26 @@ console.log((0, _math.add)(20, 30));
 console.log((0, _math.mul)(20, 30));
 document.writeln("<h2>Hello, Webpack</h2>");
 
-new _vue2.default({
-  el: "#app",
+var App = {
   template: "\n    <div>\n      <h2>{{message}}</h2>\n      <button @click=\"btnClick\">\u6309\u94AE</button>\n    </div>\n  ",
-  data: {
-    message: "Hello, Vue.js"
+  data: function data() {
+    return {
+      message: "Hello, Vue.js"
+    };
   },
+
   methods: {
     btnClick: function btnClick(e) {
       console.log(e);
     }
+  }
+};
+
+new _vue2.default({
+  el: "#app",
+  template: "<App></App>",
+  components: {
+    App: App
   }
 });
 
