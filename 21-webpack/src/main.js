@@ -14,7 +14,7 @@ import App from "./js/vue/App.vue"
 
 console.log(add(20, 30));
 console.log(mul(20, 30));
-document.writeln("<h2>Hello, Webpack</h2>");
+// document.writeln("<h2>Hello, Webpack</h2>");
 
 new Vue({
   el: "#app",
