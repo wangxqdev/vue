@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
   entry: "./src/main.js",
@@ -50,5 +51,8 @@ module.exports = {
         use: ["vue-loader"]
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.BannerPlugin("最终版权归wangxqdev所有")
+  ]
 }
