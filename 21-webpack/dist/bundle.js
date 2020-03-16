@@ -440,36 +440,44 @@ function toComment(sourceMap) {
 
 /***/ }),
 /* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_math_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__css_normal_css__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__css_normal_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__css_normal_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__css_special_scss__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__css_special_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__css_special_scss__);
+
+
+var _math = __webpack_require__(3);
+
+var _normal = __webpack_require__(4);
+
+var _normal2 = _interopRequireDefault(_normal);
+
+var _special = __webpack_require__(8);
+
+var _special2 = _interopRequireDefault(_special);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// 导入css
+console.log((0, _math.add)(20, 30));
+// 导入scss
 // Common JS
 // const {add, mul} = require("./math.js");
 
 // ES6(推荐)
 
-// 导入css
-
-// 导入scss
-
-
-console.log(Object(__WEBPACK_IMPORTED_MODULE_0__js_math_js__["a" /* add */])(20, 30));
-console.log(Object(__WEBPACK_IMPORTED_MODULE_0__js_math_js__["b" /* mul */])(20, 30));
+console.log((0, _math.mul)(20, 30));
 document.writeln("<h2>Hello, Webpack</h2>");
 
 /***/ }),
 /* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return add; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return mul; });
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 function add(num1, num2) {
   return num1 + num2;
 }
@@ -484,9 +492,8 @@ function mul(num1, num2) {
 // }
 
 // ES6(推荐)
-
-
-
+exports.add = add;
+exports.mul = mul;
 
 /***/ }),
 /* 4 */
