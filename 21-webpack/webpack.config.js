@@ -1,12 +1,13 @@
 const path = require("path");
 const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: "./src/main.js",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
-    publicPath: "./dist/"
+    // publicPath: "./dist/"
   },
   resolve: {
     extensions: [".js", ".css", ".scss", ".vue"],
@@ -53,6 +54,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.BannerPlugin("最终版权归wangxqdev所有")
+    new webpack.BannerPlugin("最终版权归wangxqdev所有"),
+    new HtmlWebpackPlugin({
+      template: "index.html"
+    })
   ]
 }
