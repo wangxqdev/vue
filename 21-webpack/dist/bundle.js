@@ -60,81 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_math_js__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__css_normal_css__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__css_normal_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__css_normal_css__);
-// Common JS
-// const {add, mul} = require("./math.js");
-
-// ES6(推荐)
-
-
-
-console.log(Object(__WEBPACK_IMPORTED_MODULE_0__js_math_js__["a" /* add */])(20, 30));
-console.log(Object(__WEBPACK_IMPORTED_MODULE_0__js_math_js__["b" /* mul */])(20, 30));
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return add; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return mul; });
-function add(num1, num2) {
-  return num1 + num2;
-}
-
-function mul(num1, num2) {
-  return num1 * num2;
-}
-
-// Common JS
-// module.exports = {
-//   add, mul
-// }
-
-// ES6(推荐)
-
-
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var api = __webpack_require__(3);
-            var content = __webpack_require__(4);
-
-            content = content.__esModule ? content.default : content;
-
-            if (typeof content === 'string') {
-              content = [[module.i, content, '']];
-            }
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = api(content, options);
-
-var exported = content.locals ? content.locals : {};
-
-
-
-module.exports = exported;
-
-/***/ }),
-/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -409,20 +339,7 @@ module.exports = function (list, options) {
 };
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "body {\r\n  background-color: #f00;\r\n}", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 5 */
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -520,6 +437,134 @@ function toComment(sourceMap) {
   var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
   return "/*# ".concat(data, " */");
 }
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_math_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__css_normal_css__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__css_normal_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__css_normal_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__css_special_scss__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__css_special_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__css_special_scss__);
+// Common JS
+// const {add, mul} = require("./math.js");
+
+// ES6(推荐)
+
+// 导入css
+
+// 导入scss
+
+
+console.log(Object(__WEBPACK_IMPORTED_MODULE_0__js_math_js__["a" /* add */])(20, 30));
+console.log(Object(__WEBPACK_IMPORTED_MODULE_0__js_math_js__["b" /* mul */])(20, 30));
+document.writeln("<h2>Hello, Webpack</h2>");
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return add; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return mul; });
+function add(num1, num2) {
+  return num1 + num2;
+}
+
+function mul(num1, num2) {
+  return num1 * num2;
+}
+
+// Common JS
+// module.exports = {
+//   add, mul
+// }
+
+// ES6(推荐)
+
+
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(0);
+            var content = __webpack_require__(5);
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+var exported = content.locals ? content.locals : {};
+
+
+
+module.exports = exported;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(1);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "body {\r\n  background-color: #f00;\r\n}", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(0);
+            var content = __webpack_require__(7);
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+var exported = content.locals ? content.locals : {};
+
+
+
+module.exports = exported;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(1);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "body{font-size:50px;color:#fff}\n", ""]);
+// Exports
+module.exports = exports;
+
 
 /***/ })
 /******/ ]);
