@@ -8,6 +8,7 @@ module.exports = {
     publicPath: "./dist/"
   },
   resolve: {
+    extensions: [".js", ".css", ".scss", ".vue"],
     alias: {
       "vue$": "vue/dist/vue.esm.js"
     }
@@ -43,6 +44,10 @@ module.exports = {
             presets: ["es2015"]
           }
         }
+      },
+      {
+        test: /\.vue$/,
+        use: ["vue-loader"]
       }
     ]
   }

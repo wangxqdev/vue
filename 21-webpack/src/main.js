@@ -9,33 +9,16 @@ import normal from "./css/normal.css";
 import special from "./css/special.scss";
 // 导入Vue
 import Vue from "vue";
+// import App from "./js/vue/App.js"
+import App from "./js/vue/App.vue"
 
 console.log(add(20, 30));
 console.log(mul(20, 30));
 document.writeln("<h2>Hello, Webpack</h2>");
 
-const App = {
-  template: `
-    <div>
-      <h2>{{message}}</h2>
-      <button @click="btnClick">按钮</button>
-    </div>
-  `,
-  data() {
-    return {
-      message: "Hello, Vue.js"
-    }
-  },
-  methods: {
-    btnClick(e) {
-      console.log(e);
-    }
-  }
-}
-
 new Vue({
   el: "#app",
-  template: "<App></App>",
+  template: "<App/>",
   components: {
     App
   }
