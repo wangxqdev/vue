@@ -1,12 +1,11 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const UglifyjsWebpackPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
   entry: "./src/main.js",
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "../dist"),
     filename: "bundle.js",
     // publicPath: "./dist/"
   },
@@ -58,11 +57,6 @@ module.exports = {
     new webpack.BannerPlugin("最终版权归wangxqdev所有"),
     new HtmlWebpackPlugin({
       template: "index.html"
-    }),
-    new UglifyjsWebpackPlugin()
-  ],
-  devServer: {
-    contentBase: "./dist",
-    inline: true
-  }
+    })
+  ]
 }
