@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const obj = {
+      aaa() {
+        // 1. function() {} 定义函数默认通过 函数对象.call(window, [参数])方式调用
+        // 2. this === window
+        setTimeout(function(){
+          console.log(this);
+        }, 1000);
+
+        // 1. this === obj(向上递归查找this)
+        setTimeout(() => {
+          console.log(this);
+        }, 1000);
+
+        // option：遍历 => while | 迭代 => for
+      }
+    }
+  </script>
+</body>
+
+</html>
