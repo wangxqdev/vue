@@ -25,7 +25,9 @@ const routes = [
 const router = new VueRouter({
   routes,
   // 默认哈希模式, 改成 HTML5 History 模式
-  mode: 'history'
+  mode: 'history',
+  // 统一修改
+  linkActiveClass: 'active'
 })
 
 export default router
