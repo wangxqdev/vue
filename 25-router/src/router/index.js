@@ -8,6 +8,11 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    // 默认重定向至首页
+    path: '/',
+    redirect: '/home'
+  },
+  {
     path: '/home',
     component: Home
   },
@@ -18,7 +23,9 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  // 默认哈希模式, 改成 HTML5 History 模式
+  mode: 'history'
 })
 
 export default router
