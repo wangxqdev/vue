@@ -29,10 +29,10 @@ const routes = [
       title: '首页'
     },
     children: [
-      {
-        path: '',
-        redirect: 'news'
-      },
+      // {
+      //   path: '',
+      //   redirect: 'news'
+      // },
       {
         path: 'news',
         component: HomeNews
