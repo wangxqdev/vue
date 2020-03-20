@@ -1,11 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from '../components/Home'
-import About from '../components/About'
-import User from '../components/User'
+// import Home from '../components/Home'
+// import About from '../components/About'
+// import User from '../components/User'
 
 Vue.use(VueRouter)
+
+// 路由懒加载
+const Home = () => import('../components/Home')
+const About = () => import('../components/About')
+const User = () => import('../components/User')
 
 const routes = [
   {
