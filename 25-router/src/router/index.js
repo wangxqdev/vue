@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+// @Deprecated
 // import Home from '../components/Home'
 // import About from '../components/About'
 // import User from '../components/User'
@@ -13,6 +14,7 @@ const HomeNews = () => import('../components/HomeNews')
 const HomeMessage = () => import('../components/HomeMessage')
 const About = () => import('../components/About')
 const User = () => import('../components/User')
+const Profile = () => import('../components/Profile')
 
 const routes = [
   {
@@ -46,6 +48,10 @@ const routes = [
     // 动态路由
     path: '/user/:userId',
     component: User
+  },
+  {
+    path: '/profile',
+    component: Profile
   }
 ]
 
