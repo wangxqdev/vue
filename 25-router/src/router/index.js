@@ -25,6 +25,9 @@ const routes = [
   {
     path: '/home',
     component: Home,
+    meta: {
+      title: '首页'
+    },
     children: [
       {
         path: '',
@@ -38,20 +41,33 @@ const routes = [
         path: 'message',
         component: HomeMessage
       }
-    ]
+    ],
+    // 局部前置守卫
+    // beforeEnter: (to, from, next) => {
+      
+    // }
   },
   {
     path: '/about',
-    component: About
+    component: About,
+    meta: {
+      title: '关于'
+    }
   },
   {
     // 动态路由
     path: '/user/:userId',
-    component: User
+    component: User,
+    meta: {
+      title: '用户'
+    }
   },
   {
     path: '/profile',
-    component: Profile
+    component: Profile,
+    meta: {
+      title: '档案'
+    }
   }
 ]
 
@@ -62,5 +78,16 @@ const router = new VueRouter({
   // 统一修改
   linkActiveClass: 'active'
 })
+
+// 全局前置守卫
+router.beforeEach((to, from, next) => {
+  document.title = to.matched[0].meta.title
+  next()
+})
+
+// 全局后置守卫
+// router.afterEach((to, from) => {
+
+// })
 
 export default router
