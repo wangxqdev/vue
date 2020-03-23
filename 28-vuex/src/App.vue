@@ -1,28 +1,33 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
+    <h2>{{$store.state.counter}}</h2>
+    <button @click="add">＋</button>
+    <button @click="sub">－</button>
+    <ul>
+      <li v-for="item in $store.getters.gtPriceBooks(88)" :key="item.id">{{item.name}}</li>
+    </ul>
+    <hello-vuex></hello-vuex>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import HelloVuex from "./components/HelloVuex";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    HelloVuex
+  },
+  methods: {
+    add() {
+      this.$store.commit('increment')
+    },
+    sub() {
+      this.$store.commit('decrement')
+    }
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
