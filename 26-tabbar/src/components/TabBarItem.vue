@@ -1,13 +1,49 @@
 <template>
-  <div class="tab-bar-item">
-    <slot name="item-icon"></slot>
-    <slot name="item-text"></slot>
+  <div class="tab-bar-item" @click="itemClick">
+    <!-- 具名插槽 -->
+    <div v-if="!isActive">
+      <slot name="item-icon"></slot>
+    </div>
+    <div v-else>
+      <slot name="item-icon-active"></slot>
+    </div>
+    <!-- <div :class="{active: isActive}">
+      <slot name="item-text"></slot>
+    </div> -->
+    <div :style="activeStyle">
+      <slot name="item-text"></slot>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "TabBarItem"
+  name: "TabBarItem",
+  data() {
+    return {
+      // isActive: false
+    }
+  },
+  computed: {
+   isActive() {
+     return this.$route.path.indexOf(this.link) !== -1
+   },
+   activeStyle() {
+     return this.isActive ? {fontWeight: this.activeWeight} : {}
+   }
+  },
+  props: {
+    link: String,
+    activeWeight: {
+      type: Number,
+      default: 600
+    }
+  },
+  methods: {
+    itemClick() {
+      this.$router.replace(this.link)
+    }
+  },
 };
 </script>
 
@@ -25,5 +61,10 @@ export default {
   margin: 2px 0 2px 0;
   /* 去除底边3px */
   vertical-align: middle;
+}
+
+.active {
+  /* color: #f00; */
+  font-weight: 600;
 }
 </style>
