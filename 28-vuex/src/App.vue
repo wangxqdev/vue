@@ -5,8 +5,12 @@
     <button @click="add">＋</button>
     <button @click="sub">－</button>
     <button @click="addBook">添加书籍</button>
+    <button @click="updateInfo">更新信息</button>
     <ul>
       <li v-for="item in $store.getters.gtPriceBooks(88)" :key="item.id">{{item.name}}</li>
+    </ul>
+    <ul>
+      <li v-for="(value, key) in $store.state.info" :key="value">{{key}} - {{value}}</li>
     </ul>
     <h2>---------- HelloVuex ----------</h2>
     <hello-vuex></hello-vuex>
@@ -37,6 +41,9 @@ export default {
       //   type: 'addBook',
       //   book
       // })
+    },
+    updateInfo() {
+      this.$store.commit('updateInfo')
     }
   },  
 }
