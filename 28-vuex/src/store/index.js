@@ -18,6 +18,19 @@ export default new Vuex.Store({
       height: 1.88
     }
   },
+  // 异步调用
+  actions: {
+    aUpdateInfo(context, message) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log(message)
+          context.commit('updateInfo')
+          resolve('aaa')
+        }, 1000)
+      })
+    }
+  },
+  // 同步调用
   mutations: {
     // 方法名建议抽成常量
     ['increment'](state) {

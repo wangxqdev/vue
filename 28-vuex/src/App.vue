@@ -43,7 +43,10 @@ export default {
       // })
     },
     updateInfo() {
-      this.$store.commit('updateInfo')
+      // this.$store.commit('updateInfo')
+      this.$store.dispatch('aUpdateInfo', 'test').then(res => {
+        console.log(res)
+      })
     }
   },  
 }
