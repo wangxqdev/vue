@@ -19,16 +19,17 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    increment(state) {
+    // 方法名建议抽成常量
+    ['increment'](state) {
       state.counter++
     },
-    decrement(state) {
+    ['decrement'](state) {
       state.counter--
     },
-    addBook(state, book) {
+    ['addBook'](state, book) {
       state.books.push(book)
     },
-    updateInfo(state) {
+    ['updateInfo'](state) {
       // 1. 增加属性并添加至 Vue 响应式系统
       // state.info['address'] = 'China' => 无效
       Vue.set(state.info, 'address', 'China')
