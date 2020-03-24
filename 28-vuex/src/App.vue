@@ -18,24 +18,24 @@
 </template>
 
 <script>
-import HelloVuex from './components/HelloVuex'
+import HelloVuex from "./components/HelloVuex";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     HelloVuex
   },
   methods: {
     add() {
-      this.$store.commit('increment')
+      this.$store.commit("increment");
     },
     sub() {
-      this.$store.commit('decrement')
+      this.$store.commit("decrement");
     },
     addBook() {
-      const book = { id: "5", name: "深入理解Java虚拟机", price: 94.6 }
+      const book = { id: "5", name: "深入理解Java虚拟机", price: 94.6 };
       // 1. 第一种提交风格
-      this.$store.commit('addBook', book)
+      this.$store.commit("addBook", book);
       // 2. 另一种提交风格, 在 mutations 里需要通过 payload 形参对象接收
       // this.$store.commit({
       //   type: 'addBook',
@@ -44,12 +44,12 @@ export default {
     },
     updateInfo() {
       // this.$store.commit('updateInfo')
-      this.$store.dispatch('aUpdateInfo', 'test').then(res => {
-        console.log(res)
-      })
+      this.$store.dispatch("aUpdateInfo", "test").then(res => {
+        console.log(res);
+      });
     }
-  },  
-}
+  }
+};
 </script>
 
 <style>
