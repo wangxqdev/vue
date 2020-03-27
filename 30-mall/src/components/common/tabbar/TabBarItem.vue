@@ -24,14 +24,14 @@ export default {
       return this.$route.path.indexOf(this.link) !== -1;
     },
     activeStyle() {
-      return this.isActive ? { fontWeight: this.activeWeight } : {};
+      return this.isActive ? { color: this.activeColor } : {};
     }
   },
   props: {
     link: String,
-    activeWeight: {
-      type: Number,
-      default: 400
+    activeColor: {
+      type: String,
+      default: '#FF1493'
     }
   },
   methods: {
@@ -61,6 +61,6 @@ export default {
 
 .active {
   /* color: #f00; */
-  font-weight: 400;
+  color: #FF1493;
 }
 </style>
