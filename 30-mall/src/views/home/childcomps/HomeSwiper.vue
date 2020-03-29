@@ -1,7 +1,7 @@
 <template>
   <div>
     <swiper>
-      <swiper-item v-for="item in cbanners" :key="item.title">
+      <swiper-item v-for="item in banners" :key="item.title">
         <a :href="item.link">
           <img :src="item.image" alt="">
         </a>
@@ -20,7 +20,7 @@ export default {
     SwiperItem
   },
   props: {
-    cbanners: {
+    banners: {
       type: Array,
       default() {
         return []
