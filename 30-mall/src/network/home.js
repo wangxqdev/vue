@@ -1,8 +1,19 @@
 import request from './request'
 
-export let requestHomeMultidata = () => {
+export let getHomeMultidata = () => {
   return request({
     url: '/home/multidata',
-    methods: 'get'
+    method: 'get'
   }) 
+}
+
+export let getHomeData = (type, page) => {
+  return request({
+    url: '/home/data',
+    method: 'get',
+    params: {
+      type,
+      page
+    }
+  })
 }

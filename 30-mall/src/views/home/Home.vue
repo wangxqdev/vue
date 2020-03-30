@@ -1,6 +1,8 @@
 <template>
   <div id="home">
-    <nav-bar class="home-nav"><div slot="center">购物街</div></nav-bar>
+    <nav-bar class="home-nav">
+      <div slot="center">购物街</div>
+    </nav-bar>
     <home-swiper :banners="banners"></home-swiper>
     <home-recommend :recommends="recommends"></home-recommend>
     <home-feature></home-feature>
@@ -62,14 +64,14 @@
 </template>
 
 <script>
-import HomeSwiper from './childcomps/HomeSwiper'
-import HomeRecommend from './childcomps/HomeRecommend'
-import HomeFeature from './childcomps/HomeFeature'
+import HomeSwiper from "./childcomps/HomeSwiper";
+import HomeRecommend from "./childcomps/HomeRecommend";
+import HomeFeature from "./childcomps/HomeFeature";
 
 import NavBar from "components/common/navbar/NavBar";
-import TabControl from "components/content/tabcontrol/TabControl"
+import TabControl from "components/content/tabcontrol/TabControl";
 
-import { requestHomeMultidata } from "network/home";
+import { getHomeMultidata, getHomeData } from "network/home";
 
 export default {
   name: "Home",
@@ -83,15 +85,42 @@ export default {
   data() {
     return {
       banners: [],
-      recommends: []
-    }
+      recommends: [],
+      goods: {
+        pop: {
+          page: 0,
+          list: []
+        },
+        lastest: {
+          page: 0,
+          list: []
+        },
+        selected: {
+          page: 0,
+          list: []
+        }
+      }
+    };
   },
   created() {
-    requestHomeMultidata().then(res => {
-      this.banners = res.data.banner.list
-      this.recommends = res.data.recommend.list
-    })
-  }
+    this.getHomeMultidata()
+
+  },
+  methods: {
+    getHomeMultidata() {
+      getHomeMultidata().then(res => {
+        this.banners = res.data.banner.list;
+        this.recommends = res.data.recommend.list;
+      })
+    },
+    getHomeData(type) {
+      const page = this.goods[type].page + 1
+      getHomeData(type, page).then(res => {
+        this.goods[type].list.push(...res.data.list)
+        this.goods[type].page += 1
+      })
+    }
+  },
 };
 </script>
 
