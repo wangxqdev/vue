@@ -1,6 +1,6 @@
 import request from './request'
 
-export let getHomeMultidata = () => {
+export let getHomeMultiData = () => {
   return request({
     url: '/home/multidata',
     method: 'get'

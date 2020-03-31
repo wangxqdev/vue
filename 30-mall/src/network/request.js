@@ -2,7 +2,9 @@ import axios from 'axios'
 
 export default config => {
   const instance = axios.create({
-    baseURL: 'http://123.207.32.32:8000',
+    // baseURL: 'http://123.207.32.32:8000',
+    // 测试地址
+    baseURL: 'http://localhost:8090',
     timeout: 5000
   })
 

@@ -71,7 +71,7 @@ import HomeFeature from "./childcomps/HomeFeature";
 import NavBar from "components/common/navbar/NavBar";
 import TabControl from "components/content/tabcontrol/TabControl";
 
-import { getHomeMultidata, getHomeData } from "network/home";
+import { getHomeMultiData, getHomeData } from "network/home";
 
 export default {
   name: "Home",
@@ -103,12 +103,12 @@ export default {
     };
   },
   created() {
-    this.getHomeMultidata()
+    this.getHomeMultiData()
 
   },
   methods: {
-    getHomeMultidata() {
-      getHomeMultidata().then(res => {
+    getHomeMultiData() {
+      getHomeMultiData().then(res => {
         this.banners = res.data.banner.list;
         this.recommends = res.data.recommend.list;
       })
