@@ -7,6 +7,7 @@
     <home-recommend :recommends="recommends"></home-recommend>
     <home-feature></home-feature>
     <tab-control class="tab-control" :titles="['流行', '新款', '精选']"></tab-control>
+    <goods-list :goods="goods['pop'].list"></goods-list>
 
     <ul>
       <li>列表1</li>
@@ -70,6 +71,7 @@ import HomeFeature from "./childcomps/HomeFeature";
 
 import NavBar from "components/common/navbar/NavBar";
 import TabControl from "components/content/tabcontrol/TabControl";
+import GoodsList from "components/content/goods/GoodsList"
 
 import { getHomeMultiData, getHomeData } from "network/home";
 
@@ -80,7 +82,8 @@ export default {
     HomeRecommend,
     HomeFeature,
     NavBar,
-    TabControl
+    TabControl,
+    GoodsList
   },
   data() {
     return {
@@ -104,7 +107,7 @@ export default {
   },
   created() {
     this.getHomeMultiData()
-
+    this.getHomeData('pop')
   },
   methods: {
     getHomeMultiData() {
@@ -143,5 +146,6 @@ export default {
 .tab-control {
   position: sticky;
   top: 44px;
+  z-index: 999;
 }
 </style>
