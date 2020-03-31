@@ -7,23 +7,27 @@
 </template>
 
 <script>
-import BScroll from 'better-scroll'
+import BScroll from "better-scroll";
 
 export default {
-  name: 'Scroll',
+  name: "Scroll",
   data() {
     return {
       scroll: null
-    }
+    };
   },
   mounted() {
     this.scroll = new BScroll(this.$refs.wrapper, {
       click: true
-    })
+    });
+  },
+  methods: {
+    scrollTo(x, y, ms = 500) {
+      return this.scroll.scrollTo(x, y, ms);
+    }
   }
-}
+};
 </script>
 
 <style scoped>
-
 </style>

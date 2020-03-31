@@ -3,13 +3,14 @@
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
-    <scroll class="content">
+    <scroll class="content" ref="scroll">
       <home-swiper :banners="banners"></home-swiper>
       <home-recommend :recommends="recommends"></home-recommend>
       <home-feature></home-feature>
       <tab-control class="tab-control" :titles="['流行', '新款', '精选']" @tabClick="tabClick"></tab-control>
       <goods-list :goods="showGoods"></goods-list>
     </scroll>
+    <back-top @click.native="backClick"></back-top>
   </div>
 </template>
 
@@ -23,6 +24,7 @@ import Scroll from "components/common/scroll/Scroll"
 
 import TabControl from "components/content/tabcontrol/TabControl";
 import GoodsList from "components/content/goods/GoodsList"
+import BackTop from "components/content/backtop/BackTop"
 
 import { getHomeMultiData, getHomeData } from "network/home";
 
@@ -35,7 +37,8 @@ export default {
     NavBar,
     Scroll,
     TabControl,
-    GoodsList
+    GoodsList,
+    BackTop
   },
   data() {
     return {
@@ -95,6 +98,9 @@ export default {
           this.currentType = 'selected'
           break;
       }
+    },
+    backClick() {
+      this.$refs.scroll.scrollTo(0, 0)
     }
   },
 };
