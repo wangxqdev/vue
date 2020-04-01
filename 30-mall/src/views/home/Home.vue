@@ -69,9 +69,10 @@ export default {
     this.getHomeData('selected')
   },
   mounted() {
+    const refresh = this.$refs.scroll.refresh
     // 监听事件总线
-    this.$bus.$on('itemImageLoad', ()=> {
-      this.$refs.scroll.refresh()
+    this.$bus.$on('itemImageLoad', () => {
+      this.debounce(refresh, 100)()
     })
   },
   computed: {
@@ -106,6 +107,17 @@ export default {
         case 2:
           this.currentType = 'selected'
           break;
+      }
+    },
+    debounce(func, delay = 200) {
+      let timer = null
+      return (...args) => {
+        if (timer) {
+          clearInterval(timer)
+        }
+        setTimeout(() => {
+          func.apply(this, args)
+        }, delay)
       }
     },
     backClick() {
