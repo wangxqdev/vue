@@ -17,6 +17,12 @@ export default {
       default() {
         return 0
       }
+    },
+    pullUpLoad: {
+      type: Boolean,
+      default() {
+        return false
+      }
     }
   },
   data() {
@@ -33,10 +39,17 @@ export default {
     this.scroll.on('scroll', (position) => {
       this.$emit('scroll', position)
     })
+
+    this.scroll.on('pullingUp', () => {
+      this.$emit('pullingUp')
+    })
   },
   methods: {
     scrollTo(x, y, ms = 500) {
       return this.scroll.scrollTo(x, y, ms);
+    },
+    finishPullUp() {
+      return this.scroll.finishPullUp()
     }
   }
 };
