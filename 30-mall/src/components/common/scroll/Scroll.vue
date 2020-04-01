@@ -46,10 +46,13 @@ export default {
   },
   methods: {
     scrollTo(x, y, ms = 500) {
-      return this.scroll.scrollTo(x, y, ms);
+      this.scroll.scrollTo(x, y, ms);
     },
     finishPullUp() {
-      return this.scroll.finishPullUp()
+      this.scroll.finishPullUp()
+    },
+    refresh() {
+      this.scroll.refresh()
     }
   }
 };
