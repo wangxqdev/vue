@@ -65,7 +65,8 @@ export default {
       isShowBackTop: false,
       isLoadingMore: false,
       tabOffsetTop: 0,
-      isShowTabControl: false
+      isShowTabControl: false,
+      saveY: 0
     };
   },
   created() {
@@ -80,6 +81,13 @@ export default {
     this.$bus.$on('itemImageLoad', () => {
       debounce(refresh, 100)()
     })
+  },
+  activated() {
+    this.$refs.scroll.scrollTo(0, this.saveY, 0)
+    this.$refs.scroll.refresh()
+  },
+  deactivated() {
+    this.saveY = this.$refs.scroll.getScrollY()
   },
   computed: {
     showGoods() {
