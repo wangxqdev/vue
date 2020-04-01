@@ -3,11 +3,12 @@
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
+    <tab-control class="tab-control" :titles="['流行', '新款', '精选']" @tabClick="tabClick" ref="tabControl1" v-show="isShowTabControl"></tab-control>
     <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll" :pull-up-load="true" @pullingUp="loadMore">
-      <home-swiper :banners="banners"></home-swiper>
+      <home-swiper :banners="banners" @swiperImageLoad="swiperImageLoad"></home-swiper>
       <home-recommend :recommends="recommends"></home-recommend>
       <home-feature></home-feature>
-      <tab-control class="tab-control" :titles="['流行', '新款', '精选']" @tabClick="tabClick"></tab-control>
+      <tab-control :titles="['流行', '新款', '精选']" @tabClick="tabClick" ref="tabControl2"></tab-control>
       <goods-list :goods="showGoods"></goods-list>
     </scroll>
     <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
@@ -62,7 +63,9 @@ export default {
       },
       currentType: 'pop',
       isShowBackTop: false,
-      isLoadingMore: false
+      isLoadingMore: false,
+      tabOffsetTop: 0,
+      isShowTabControl: false
     };
   },
   created() {
@@ -114,16 +117,22 @@ export default {
           this.currentType = 'selected'
           break;
       }
+      this.$refs.tabControl1.currentIndex = index
+      this.$refs.tabControl2.currentIndex = index
     },
     backClick() {
       this.$refs.scroll.scrollTo(0, 0)
     },
     contentScroll(position) {
       this.isShowBackTop = Math.abs(position.y) > 1000
+      this.isShowTabControl = Math.abs(position.y) > this.tabOffsetTop
     },
     loadMore() {
       this.isLoadingMore = true
       this.getHomeData(this.currentType)
+    },
+    swiperImageLoad() {
+      this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop
     }
   },
 };
@@ -133,23 +142,24 @@ export default {
 #home {
   position: relative;
   height: 100vh;
-  padding-top: 44px;
 }
 
 .home-nav {
-  position: fixed;
+  /* 使用原生滚动时需要 */
+  /* position: fixed;
   top: 0;
   right: 0;
   left: 0;
-  z-index: 999;
-
+  z-index: 999; */
   background-color: var(--color-tint);
   color: #fff;
 }
 
 .tab-control {
-  position: sticky;
+  /* position: sticky;
   top: 44px;
+  z-index: 999; */
+  position: relative;
   z-index: 999;
 }
 
