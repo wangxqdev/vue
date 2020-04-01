@@ -67,6 +67,8 @@ export default {
     this.getHomeData('pop')
     this.getHomeData('lastest')
     this.getHomeData('selected')
+  },
+  mounted() {
     // 监听事件总线
     this.$bus.$on('itemImageLoad', ()=> {
       this.$refs.scroll.refresh()
