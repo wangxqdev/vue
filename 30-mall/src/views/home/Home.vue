@@ -28,6 +28,8 @@ import BackTop from "components/content/backtop/BackTop"
 
 import { getHomeMultiData, getHomeData } from "network/home";
 
+import { debounce } from "common/utils"
+
 export default {
   name: "Home",
   components: {
@@ -59,7 +61,8 @@ export default {
         }
       },
       currentType: 'pop',
-      isShowBackTop: false
+      isShowBackTop: false,
+      isLoadingMore: false
     };
   },
   created() {
@@ -72,7 +75,7 @@ export default {
     const refresh = this.$refs.scroll.refresh
     // 监听事件总线
     this.$bus.$on('itemImageLoad', () => {
-      this.debounce(refresh, 100)()
+      debounce(refresh, 100)()
     })
   },
   computed: {
@@ -93,7 +96,10 @@ export default {
         this.goods[type].list.push(...res.data.list)
         this.goods[type].page += 1
 
-        this.$refs.scroll.finishPullUp()
+        if (this.isLoadingMore) {
+          this.$refs.scroll.finishPullUp()
+          this.isLoadingMore = false
+        }
       })
     },
     tabClick(index) {
@@ -109,17 +115,6 @@ export default {
           break;
       }
     },
-    debounce(func, delay = 200) {
-      let timer = null
-      return (...args) => {
-        if (timer) {
-          clearInterval(timer)
-        }
-        setTimeout(() => {
-          func.apply(this, args)
-        }, delay)
-      }
-    },
     backClick() {
       this.$refs.scroll.scrollTo(0, 0)
     },
@@ -127,6 +122,7 @@ export default {
       this.isShowBackTop = Math.abs(position.y) > 1000
     },
     loadMore() {
+      this.isLoadingMore = true
       this.getHomeData(this.currentType)
     }
   },
