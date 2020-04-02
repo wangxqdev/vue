@@ -3,7 +3,7 @@
     <div class="info-title">{{ goods.title }}</div>
     <div class="info-price">
       <span class="n-price">{{ fullPrice(goods.newPrice) }}</span>
-      <span class="o-price">{{ fullPrice(goods.newPrice) }}</span>
+      <span class="o-price">{{ fullPrice(goods.oldPrice) }}</span>
       <span class="discount">{{ goods.discount }}</span>
     </div>
     <div class="info-others">
