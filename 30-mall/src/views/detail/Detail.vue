@@ -2,33 +2,43 @@
   <div class="detail">
     <detail-nav-bar></detail-nav-bar>
     <detail-swiper :top-images="topImages"></detail-swiper>
+    <detail-base-info :goods="goods"></detail-base-info>
   </div>
 </template>
 
 <script>
-import DetailNavBar from 'views/detail/childcomps/DetailNavBar'
-import DetailSwiper from 'views/detail/childcomps/DetailSwiper'
+import DetailNavBar from './childcomps/DetailNavBar'
+import DetailSwiper from './childcomps/DetailSwiper'
+import DetailBaseInfo from './childcomps/DetailBaseInfo'
 
-import { getDetail } from 'network/detail'
+import { getDetail, Goods } from 'network/detail'
 
 export default {
   name: 'Detail',
   components: {
     DetailNavBar,
-    DetailSwiper
+    DetailSwiper,
+    DetailBaseInfo
   },
   data() {
     return {
       id: '',
-      topImages: []
+      topImages: [],
+      goods: {}
     }
   },
   created() {
     this.id = this.$route.params.id 
-
-    getDetail(this.id).then(res => {
-      this.topImages = res.result.itemInfo.topImages
-    })
+    this.getDetail()
+  },
+  methods: {
+    getDetail() {
+      getDetail(this.id).then(res => {
+        const result = res.result
+        this.topImages = result.itemInfo.topImages
+        this.goods = new Goods(result.itemInfo, result.columns, result.shopInfo.services)
+      })
+    } 
   }
 }
 </script>
