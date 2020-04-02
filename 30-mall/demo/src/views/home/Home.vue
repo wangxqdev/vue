@@ -1,144 +1,180 @@
 <template>
   <div id="home">
-    <nav-bar class="home-nav-bar">
-      <div slot="center">购物街</div>
-    </nav-bar>
-<!-- ref 是用于定位元素和取到组件的内容，:是绑定属性 @是绑定方法-->
-    <scroller class="home-scroller" ref="scroller" :probe-type="3" @scroll="getPostion">
-      <home-swiper :cbanners="banners"/>
-      <home-recommend :cproducts="products"/>
-      <home-feature-view/>
-      <tab-control class="home-tab-control" :ctitles="['流行', '新款', '精选']" @tabClick="pTabClick"/>
-      <goods-list :cgoods="showGoods"/>
-    </scroller>
+    <tab-bar>
+      <slot slot="navBarCenter">购物街</slot>
+    </tab-bar>
+    <tab-control v-show="tabControl1Show"  :title="['流行','新款','精选']" class="tabcontrol1" ref="tabcontrol1" @getTabControlIndex="itemClick" />
 
-    <back-top @click.native="backTopClick" v-show="isShowBackTop" />
+    <scroll class="wrapper" ref="wrapper"
+            :probeType="3"
+            @scrollPosition="getScrollPosition"
+            :pullUpLoad="true"
+            @pullingUp="getMore">
+
+      <home-swiper :banners="banners" @imageLoad="imageLoad"></home-swiper>
+      <home-recommend-information :recommends="recommends"></home-recommend-information>
+      <home-feature></home-feature>
+      <tab-control :title="['流行','新款','精选']" @getTabControlIndex="itemClick" ref="tabcontrol2"/>
+      <goods-list :goodslist="goods[currentTabType].list"></goods-list>
+    </scroll>
+    <back-top @click.native="backTopClick" v-show="isMore1000"></back-top>
+
   </div>
+
 </template>
 
 <script>
-    import NavBar from "components/common/navbar/NavBar";
-    import HomeSwiper from "./childComps/HomeSwiper";
-    import HomeRecommend from "./childComps/HomeRecommend";
-    import HomeFeatureView from "./childComps/HomeFeatureView";
-    import TabControl from "components/contents/tabControl/TabControl";
-    import GoodsList from "components/contents/good/GoodsList";
-    import Scroller from "components/common/scroller/Scroller";
-    import BackTop from "components/contents/backTop/BackTop";
+  import TabBar from 'components/common/navbar/NavBar'
+  import TabControl from 'components/content/tabcontrol/TabControl'
+  import GoodsList from 'components/content/goods/GoodsList'
+  import Scroll from 'components/common/scroll/Scroll'
+  import BackTop from 'components/content/backtop/BackTop'
 
-    import {getHomeMultiData, getGoodsData} from "network/home";
+  import HomeSwiper from './childComponents/HomeSwiper'
+  import HomeRecommendInformation from './childComponents/RecommendInformation'
+  import HomeFeature from './childComponents/HomeFeature'
 
-    export default {
-        name: "Home",
-        components:{
-            NavBar,
-            HomeSwiper,
-            HomeRecommend,
-            HomeFeatureView,
-            TabControl,
-            GoodsList,
-            Scroller,
-            BackTop
-        },
-        data() {
-          return {
-            banners: [],
-            products: [],
-            goods:{
-              pop:{page:0, list:[]},
-              new:{page:0, list:[]},
-              sell:{page:0, list:[]}
-            },
-            currentType:'pop',
-            isShowBackTop: false
-          }
-        },
-        computed: {
-            showGoods() {
-                return this.goods[this.currentType].list
-            }
-        },
-        created() {
-            this.getHomeData()
 
-            this.getHomeGoodsData('pop')
-            this.getHomeGoodsData('new')
-            this.getHomeGoodsData('sell')
-        },
-        methods:{
-            pTabClick(index) {
-                switch (index) {
-                  case 0:
-                      this.currentType = 'pop'
-                      break
-                  case 1:
-                      this.currentType = 'new'
-                      break
-                  case 2:
-                      this.currentType = 'sell'
-                      break
-              }
-            },
-            getHomeData() {
-                getHomeMultiData().then(res => {
-                    this.banners = res.data.banners
-                    this.products = res.data.products
-                })
-            },
-            getHomeGoodsData(type) {
-                let page = this.goods[type].page + 1
-                getGoodsData(type, page).then(res => {
-                    this.goods[type].list.push(...res.goods)
-                    this.goods[type].page = res.page
-                })
-            },
-            backTopClick() {
-                // 通过$refs拿到组件中的对象
-                this.$refs.scroller.scrollTo(0, 0, 500)
-            },
-            getPostion(postion) {
-                this.isShowBackTop = -postion.y > 300
-            }
+
+  import {getHomeMultidata,getGoodsData} from 'network/home'
+
+  export default {
+    name: "Home",
+    data() {
+      return {
+        banners:[],
+        recommends:[],
+        isMore1000:false,
+        tabControlTop:0,
+        tabControl1Show:false,
+        leaveY:0,
+        currentTabType:'pop',
+        goods:{
+          pop:{page:0,list:[]},
+          new:{page:0,list:[]},
+          sell:{page:0,list:[]}
         }
+      }
+    },
+    components:{
+      TabBar,
+      HomeSwiper,
+      HomeRecommendInformation,
+      HomeFeature,
+      TabControl,
+      GoodsList,
+      Scroll,
+      BackTop
+    },
+    created() {
+      this.getHomeMultidata()
+      this.getGoodsData('pop',1)
+      this.getGoodsData('new',1)
+      this.getGoodsData('sell',1)
+    },
+    mounted() {
+      const refresh = this.debounce(this.$refs.wrapper.refresh,50)
+      this.$bus.$on('imgLoad', () => {
+        // this.$refs.wrapper.refresh();
+        refresh()
+      })
+    },
+    activated() {
+      this.$refs.wrapper.scroll.scrollTo(0,this.leaveY)
+      this.$refs.wrapper.scroll.refresh()
+    },
+    deactivated() {
+      this.leaveY = this.$refs.wrapper.scroll.y;
+    },
+    methods:{
+      /*
+      * 网络请求的方法
+      * */
+      getHomeMultidata(){
+        getHomeMultidata().then(res => {
+          this.banners = res.data.banner.list;
+          this.recommends = res.data.recommend.list;
+        })
+      },
+      getGoodsData(type) {
+        const page = this.goods[type].page + 1;
+        getGoodsData(type,page).then(res => {
+          this.goods[type].list.push(...res.data.list);
+          this.goods[type].page += 1;
+          this.$refs.wrapper.scroll.finishPullUp()
+        })
+      },
+
+      /*
+      * 事件监听的方法
+      * */
+      imageLoad(){
+        this.tabControlTop = this.$refs.tabcontrol2.$el.offsetTop - 40;
+      },
+      //根据子组件tabControl点击，获取对应的点击项对其操作
+      itemClick(i) {
+        switch (i) {
+          case 0 :{
+            this.currentTabType = 'pop';
+            break;
+          }
+          case 1 :{
+            this.currentTabType = 'new';
+            break;
+          }
+          case 2 :{
+            this.currentTabType = 'sell';
+            break;
+          }
+        }
+        this.$refs.tabcontrol1.currentIndex = i;
+        this.$refs.tabcontrol2.currentIndex = i;
+
+      },
+      backTopClick() {
+        //可以通过refs拿到组件中的属性和方法，scrollTo(x,y,ms)
+        this.$refs.wrapper.scroll.scrollTo(0,0,500)
+      },
+      //控制回到顶部图标的显示和隐藏
+      getScrollPosition(position) {
+        this.isMore1000 = -position.y > 1000;
+        //控制tabcontrol的显示和隐藏
+        if(-position.y >= this.tabControlTop) {
+          this.tabControl1Show = true;
+        }else {
+          this.tabControl1Show = false;
+        }
+      },
+      getMore() {
+        //加载更多数据
+        this.getGoodsData(this.currentTabType)
+
+        //解决使用better-scroll时，容易产生的 bug。由于页面加载就把能够滑动的距离计算好，所以滚到一定距离不能滚动
+        // this.$refs.wrapper.scroll.refresh();
+      },
+      //防抖动函数的封装
+      debounce(func,delay) {
+        let timer = null
+        return function () {
+          if(timer) clearTimeout(timer)
+          timer = setTimeout(()=> {
+            func()
+          },delay)
+        }
+      }
+
     }
+  }
 </script>
 
 <style scoped>
-  #home {
-    padding-top: 44px;
-    height: 100vh;
-    position: relative;
-  }
-
-  .home-nav-bar {
-    background-color: var(--color-tint);
-    color:#fff;
-
-    position: fixed;
-    left: 0;
-    right:0;
-    top: 0;
-    z-index: 9;
-
-  }
-
-  .home-tab-control{
-    /*两个要混合使用*/
-    position: sticky;
-    top: 43px;/*顶部navbar的高度*/
-    z-index: 9;
-  }
-
-  .home-scroller{
-    /*height:300px;*/
+  .wrapper {
+    height: calc(100vh - 93px);
     overflow: hidden;
-    position: absolute;
-    top: 44px;
-    bottom: 49px;
-    right: 0;
-    left: 0;
+    margin-top: 44px;
   }
-
-
-
+  .tabcontrol1 {
+    position: absolute;
+    width: 100%;
+  }
 </style>

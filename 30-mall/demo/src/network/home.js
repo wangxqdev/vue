@@ -1,17 +1,17 @@
 import {request} from './request'
 
-export function getHomeMultiData() {
+export function getHomeMultidata() {
   return request({
-    url:'/test/getBanners'
-  });
+    url: '/home/multidata'
+  })
 }
 
-export function getGoodsData(type, page) {
+export function getGoodsData(type,page) {
   return request({
-    url:'/test/getGoods',
+    url:'/home/data',
     params:{
       type,
       page
     }
-  });
+  })
 }

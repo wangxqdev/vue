@@ -1,31 +1,44 @@
 <template>
-    <div class="nar-bar">
-      <div class="left"><slot name="left"></slot></div>
-      <div class="center"><slot name="center"></slot></div>
-      <div class="right"><slot name="right"></slot></div>
+  <div class="nav-bar">
+    <div class="left">
+      <slot name="navBarLeft"></slot>
     </div>
+    <div class="center">
+      <slot name="navBarCenter"></slot>
+    </div>
+    <div class="right">
+      <slot name="navBarRight"></slot>
+    </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "NavBar"
-    }
+  export default {
+    name: "NavBar"
+  }
 </script>
 
 <style scoped>
-  .nar-bar {
+  .nav-bar {
     display: flex;
+    height: 44px;
     line-height: 44px;
+    color:#fff;
+    background: var(--color-tint);
     text-align: center;
-    box-shadow: 0 1px 1px rgba(100, 100, 100, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
   }
-
-  .left, .right {
-    width: 40px;
+  .left,
+  .right
+  {
+    width: 60px;
   }
-
   .center {
-    flex: 1;
+    width: 100%;
   }
 
 </style>
