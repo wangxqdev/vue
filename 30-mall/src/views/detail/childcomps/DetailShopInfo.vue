@@ -28,18 +28,6 @@
     <div class="shop-bottom">
       <span>进店逛逛</span>
     </div>
-
-    <ul>
-      <li>店铺详情1</li>
-      <li>店铺详情2</li>
-      <li>店铺详情3</li>
-      <li>店铺详情4</li>
-      <li>店铺详情5</li>
-      <li>店铺详情6</li>
-      <li>店铺详情7</li>
-      <li>店铺详情8</li>
-      <li>店铺详情9</li>
-    </ul>
   </div>
 </template>
 
