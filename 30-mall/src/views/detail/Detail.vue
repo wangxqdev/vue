@@ -6,6 +6,9 @@
       <detail-base-info :goods="goods"></detail-base-info>
       <detail-shop-info :shop="shop"></detail-shop-info>
       <detail-goods-info :detail-info="detailInfo"></detail-goods-info>
+      <detail-param-info></detail-param-info>
+      <detail-comment-info></detail-comment-info>
+      <goods-list :goods="recommends"></goods-list>
     </scroll>
   </div>
 </template>
@@ -16,8 +19,12 @@ import DetailSwiper from './childcomps/DetailSwiper'
 import DetailBaseInfo from './childcomps/DetailBaseInfo'
 import DetailShopInfo from './childcomps/DetailShopInfo'
 import DetailGoodsInfo from './childcomps/DetailGoodsInfo'
+import DetailParamInfo from './childcomps/DetailParamInfo'
+import DetailCommentInfo from './childcomps/DetailCommentInfo'
 
 import Scroll from 'components/common/scroll/Scroll'
+
+import GoodsList from 'components/content/goods/GoodsList'
 
 import { getDetail, Goods, Shop } from 'network/detail'
 
@@ -29,7 +36,10 @@ export default {
     DetailBaseInfo,
     DetailShopInfo,
     DetailGoodsInfo,
-    Scroll
+    DetailParamInfo,
+    DetailCommentInfo,
+    Scroll,
+    GoodsList
   },
   data() {
     return {
@@ -37,7 +47,8 @@ export default {
       topImages: [],
       goods: {},
       shop: {},
-      detailInfo: {}
+      detailInfo: {},
+      recommends: []
     }
   },
   created() {
@@ -52,6 +63,7 @@ export default {
         this.goods = new Goods(result.itemInfo, result.columns, result.shopInfo.services)
         this.shop = new Shop(result.shopInfo)
         this.detailInfo = result.detailInfo
+        this.recommends = result.recommends
       })
     } 
   }
