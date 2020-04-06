@@ -28,6 +28,8 @@ import GoodsList from 'components/content/goods/GoodsList'
 
 import { getDetail, Goods, Shop } from 'network/detail'
 
+import { itemImageListener } from "common/mixin"
+
 export default {
   name: 'Detail',
   components: {
@@ -54,6 +56,9 @@ export default {
   created() {
     this.id = this.$route.params.id 
     this.getDetail()
+  },
+  destroyed() {
+    this.$bus.$off('itemImageLoad', this.imageListener)
   },
   methods: {
     getDetail() {

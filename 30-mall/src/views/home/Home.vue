@@ -29,7 +29,7 @@ import BackTop from "components/content/backtop/BackTop"
 
 import { getHomeMultiData, getHomeData } from "network/home";
 
-import { debounce } from "common/utils"
+import { itemImageListener } from "common/mixin"
 
 export default {
   name: "Home",
@@ -43,6 +43,7 @@ export default {
     GoodsList,
     BackTop
   },
+  mixins: [ itemImageListener ],
   data() {
     return {
       banners: [],
@@ -75,19 +76,13 @@ export default {
     this.getHomeData('lastest')
     this.getHomeData('selected')
   },
-  mounted() {
-    const refresh = this.$refs.scroll.refresh
-    // 监听事件总线
-    this.$bus.$on('itemImageLoad', () => {
-      debounce(refresh, 100)()
-    })
-  },
   activated() {
     this.$refs.scroll.refresh()
     this.$refs.scroll.scrollTo(0, this.saveY, 0)
   },
   deactivated() {
     this.saveY = this.$refs.scroll.getScrollY()
+    this.$bus.$off('itemImageLoad', this.imageListener)
   },
   computed: {
     showGoods() {
