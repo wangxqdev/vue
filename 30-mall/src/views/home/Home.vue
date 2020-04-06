@@ -3,12 +3,12 @@
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
-    <tab-control class="tab-control" :titles="['流行', '新款', '精选']" @tabClick="tabClick" ref="tabControl1" v-show="isShowTabControl"></tab-control>
+    <tab-control class="tab-control" :titles="titles" @tabClick="tabClick" ref="tabControl1" v-show="isShowTabControl"></tab-control>
     <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll" :pull-up-load="true" @pullingUp="loadMore">
       <home-swiper :banners="banners" @swiperImageLoad="swiperImageLoad"></home-swiper>
       <home-recommend :recommends="recommends"></home-recommend>
       <home-feature></home-feature>
-      <tab-control :titles="['流行', '新款', '精选']" @tabClick="tabClick" ref="tabControl2"></tab-control>
+      <tab-control :titles="titles" @tabClick="tabClick" ref="tabControl2"></tab-control>
       <goods-list :goods="showGoods"></goods-list>
     </scroll>
     <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
@@ -67,14 +67,24 @@ export default {
       isLoadingMore: false,
       tabOffsetTop: 0,
       isShowTabControl: false,
-      saveY: 0
+      saveY: 0,
+      titles: [{
+        cname: '流行',
+        ename: 'pop'
+      }, {
+        cname: '新款',
+        ename: 'lastest'
+      }, {
+        cname: '精选',
+        ename: 'selected'
+      }]
     };
   },
   created() {
     this.getHomeMultiData()
-    this.getHomeData('pop')
-    this.getHomeData('lastest')
-    this.getHomeData('selected')
+    this.titles.forEach((currentValue, index, arr) => {
+      this.getHomeData(currentValue.ename)
+    });
   },
   activated() {
     this.$refs.scroll.refresh()
@@ -109,17 +119,7 @@ export default {
       })
     },
     tabClick(index) {
-      switch(index) {
-        case 0:
-          this.currentType = 'pop'
-          break
-        case 1: 
-          this.currentType = 'lastest'
-          break
-        case 2:
-          this.currentType = 'selected'
-          break;
-      }
+      this.currentType = this.titles[index].ename
       this.$refs.tabControl1.currentIndex = index
       this.$refs.tabControl2.currentIndex = index
     },
