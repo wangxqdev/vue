@@ -1,11 +1,11 @@
 <template>
   <div class="detail">
     <detail-nav-bar class="detail-nav"></detail-nav-bar>
-    <scroll class="content">
+    <scroll class="content" ref="scroll">
       <detail-swiper :top-images="topImages"></detail-swiper>
       <detail-base-info :goods="goods"></detail-base-info>
       <detail-shop-info :shop="shop"></detail-shop-info>
-      <detail-goods-info :detail-info="detailInfo"></detail-goods-info>
+      <detail-goods-info :detail-info="detailInfo" @detailImageLoad="detailImageLoad"></detail-goods-info>
       <detail-param-info></detail-param-info>
       <detail-comment-info></detail-comment-info>
       <goods-list :goods="recommends"></goods-list>
@@ -43,6 +43,7 @@ export default {
     Scroll,
     GoodsList
   },
+  mixins: [ itemImageListener ],
   data() {
     return {
       id: '',
@@ -70,6 +71,9 @@ export default {
         this.detailInfo = result.detailInfo
         this.recommends = result.recommends
       })
+    },
+    detailImageLoad() {
+      this.refresh()
     } 
   }
 }

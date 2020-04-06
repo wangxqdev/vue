@@ -3,14 +3,15 @@ import { debounce } from "./utils"
 export const itemImageListener = {
   data() {
     return {
-      imageListener: null
+      imageListener: null,
+      refresh: null
     }
   },
   mounted() {
-    const refresh = this.$refs.scroll.refresh
+    this.refresh = debounce(this.$refs.scroll.refresh, 100)
     // 监听事件总线
     this.imageListener = () => {
-      debounce(refresh, 100)()
+      this.refresh()
     }
     this.$bus.$on('itemImageLoad', this.imageListener)
   }
