@@ -1,7 +1,7 @@
 <template>
   <div class="detail">
-    <detail-nav-bar class="detail-nav" @titleClick="titleClick"></detail-nav-bar>
-    <scroll class="content" ref="scroll">
+    <detail-nav-bar class="detail-nav" @titleClick="titleClick" ref="detailNav"></detail-nav-bar>
+    <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll">
       <detail-swiper :top-images="topImages"></detail-swiper>
       <detail-base-info :goods="goods"></detail-base-info>
       <detail-shop-info :shop="shop"></detail-shop-info>
@@ -54,7 +54,8 @@ export default {
       detailInfo: {},
       recommends: [],
       themeTopYs: [],
-      getThemeTopY: null
+      getThemeTopY: null,
+      currentIndex: 0
     }
   },
   created() {
@@ -88,6 +89,16 @@ export default {
     },
     titleClick(index) {
       this.$refs.scroll.scrollTo(0, -this.themeTopYs[index], 500)
+    },
+    contentScroll(position) {
+      let positionY = Math.abs(position.y)
+      let length = this.themeTopYs.length
+      for (let i = 0; i < length; i++) {
+        if ((i !== this.currentIndex) && ((i < length - 1 && (positionY >= this.themeTopYs[i] && positionY < this.themeTopYs[i + 1])) || (i === length - 1) && (positionY >= this.themeTopYs[i]))) {
+          this.currentIndex = i
+          this.$refs.detailNav.currentIndex = this.currentIndex
+        }
+      }
     }
   }
 }
