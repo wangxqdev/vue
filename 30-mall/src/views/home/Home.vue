@@ -25,11 +25,10 @@ import Scroll from "components/common/scroll/Scroll"
 
 import TabControl from "components/content/tabcontrol/TabControl";
 import GoodsList from "components/content/goods/GoodsList"
-import BackTop from "components/content/backtop/BackTop"
 
 import { getHomeMultiData, getHomeData } from "network/home";
 
-import { itemImageListener } from "common/mixin"
+import { itemImageListener, backTopMixin } from "common/mixin"
 
 export default {
   name: "Home",
@@ -41,9 +40,8 @@ export default {
     Scroll,
     TabControl,
     GoodsList,
-    BackTop
   },
-  mixins: [ itemImageListener ],
+  mixins: [ itemImageListener, backTopMixin ],
   data() {
     return {
       banners: [],
@@ -63,7 +61,6 @@ export default {
         }
       },
       currentType: 'pop',
-      isShowBackTop: false,
       isLoadingMore: false,
       tabOffsetTop: 0,
       isShowTabControl: false,
@@ -122,9 +119,6 @@ export default {
       this.currentType = this.titles[index].ename
       this.$refs.tabControl1.currentIndex = index
       this.$refs.tabControl2.currentIndex = index
-    },
-    backClick() {
-      this.$refs.scroll.scrollTo(0, 0)
     },
     contentScroll(position) {
       this.isShowBackTop = Math.abs(position.y) > 1000

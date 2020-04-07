@@ -11,6 +11,7 @@
       <goods-list :goods="recommends" ref="recommend"></goods-list>
     </scroll>
     <detail-bottom-bar></detail-bottom-bar>
+    <back-top @click.native="backClick" v-show="isShowBackTop" class="back-top"></back-top>
   </div>
 </template>
 
@@ -30,7 +31,7 @@ import GoodsList from 'components/content/goods/GoodsList'
 
 import { getDetail, Goods, Shop } from 'network/detail'
 
-import { itemImageListener } from "common/mixin"
+import { itemImageListener, backTopMixin } from "common/mixin"
 import { debounce } from "common/utils"
 
 export default {
@@ -47,7 +48,7 @@ export default {
     Scroll,
     GoodsList
   },
-  mixins: [ itemImageListener ],
+  mixins: [ itemImageListener, backTopMixin ],
   data() {
     return {
       id: '',
@@ -107,6 +108,8 @@ export default {
           this.$refs.detailNav.currentIndex = this.currentIndex
         }
       }
+
+      this.isShowBackTop = Math.abs(position.y) > 1000
     }
   }
 }
