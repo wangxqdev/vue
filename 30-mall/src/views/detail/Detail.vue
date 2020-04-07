@@ -67,6 +67,7 @@ export default {
       this.themeTopYs.push(this.$refs.param.$el.offsetTop)
       this.themeTopYs.push(this.$refs.comment.$el.offsetTop)
       this.themeTopYs.push(this.$refs.recommend.$el.offsetTop)
+      this.themeTopYs.push(Number.MAX_VALUE)
     }, 100)
   },
   destroyed() {
@@ -93,8 +94,12 @@ export default {
     contentScroll(position) {
       let positionY = Math.abs(position.y)
       let length = this.themeTopYs.length
-      for (let i = 0; i < length; i++) {
-        if ((i !== this.currentIndex) && ((i < length - 1 && (positionY >= this.themeTopYs[i] && positionY < this.themeTopYs[i + 1])) || (i === length - 1) && (positionY >= this.themeTopYs[i]))) {
+      for (let i = 0; i < length - 1; i++) {
+        // if ((i !== this.currentIndex) && ((i < length - 1 && (positionY >= this.themeTopYs[i] && positionY < this.themeTopYs[i + 1])) || (i === length - 1) && (positionY >= this.themeTopYs[i]))) {
+        //   this.currentIndex = i
+        //   this.$refs.detailNav.currentIndex = this.currentIndex
+        // }
+        if ((i !== this.currentIndex) && (positionY >= this.themeTopYs[i] && positionY < this.themeTopYs[i + 1])) {
           this.currentIndex = i
           this.$refs.detailNav.currentIndex = this.currentIndex
         }
