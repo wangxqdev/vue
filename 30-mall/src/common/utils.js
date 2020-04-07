@@ -4,7 +4,7 @@ export let debounce = (func, delay) => {
     if (timer) {
       clearInterval(timer)
     }
-    setTimeout(() => {
+    timer = setTimeout(() => {
       func.apply(this, args)
     }, delay)
   }
