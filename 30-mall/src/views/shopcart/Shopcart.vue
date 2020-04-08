@@ -3,7 +3,7 @@
     <nav-bar class="cart-bar">
       <div slot="center">购物车({{ cartLength }})</div>
     </nav-bar>
-    <scroll class="content">
+    <scroll class="content" ref="scroll">
       <cart-list></cart-list>
     </scroll>
     <cart-bottom-bar></cart-bottom-bar>
@@ -29,6 +29,9 @@ export default {
   },
   computed: {
     ...mapGetters(['cartLength'])
+  },
+  activated() {
+    this.$refs.scroll.refresh()
   },
 };
 </script>

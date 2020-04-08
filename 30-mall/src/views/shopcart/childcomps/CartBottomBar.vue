@@ -1,7 +1,7 @@
 <template>
   <div class="bottom-bar">
     <div class="all-select">
-      <check-button class="check-button"></check-button>
+      <check-button class="check-button" :is-active="isSelectAll" @click.native="checkClick"></check-button>
       <span>全选</span>
     </div>
     <div class="price">合计: <span>{{ totalPrice | fullPrice }}</span></div>
@@ -27,12 +27,27 @@ export default {
     },
     totalCount() {
       return this.cartList.filter(currentValue => currentValue.isActive).length
+    },
+    isSelectAll() {
+      if (!this.cartList.length) {
+        return false
+      }
+      return !this.cartList.find(currentValue => !currentValue.isActive)
     }
   },
   filters: {
     fullPrice(price) {
       return `¥${price}`
     }
+  },
+  methods: {
+    checkClick() {
+      if (this.isSelectAll) {
+        this.cartList.forEach(currentValue => currentValue.isActive = false)
+      } else {
+        this.cartList.forEach(currentValue => currentValue.isActive = true)
+      }
+    } 
   }
 }
 </script>
