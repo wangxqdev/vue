@@ -6,11 +6,13 @@
     <scroll class="content">
       <cart-list></cart-list>
     </scroll>
+    <cart-bottom-bar></cart-bottom-bar>
   </div>
 </template>
 
 <script>
 import CartList from './childcomps/CartList'
+import CartBottomBar from './childcomps/CartBottomBar'
 
 import NavBar from 'components/common/navbar/NavBar'
 import Scroll from 'components/common/scroll/Scroll'
@@ -21,6 +23,7 @@ export default {
   name: "Shopcart",
   components: {
     CartList,
+    CartBottomBar,
     NavBar,
     Scroll
   },
@@ -42,6 +45,6 @@ export default {
 
 .content {
   overflow: hidden;
-  height: calc(100% - 44px);
+  height: calc(100% - 44px - 49px - 40px);
 }
 </style>
