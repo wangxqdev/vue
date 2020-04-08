@@ -34,6 +34,8 @@ import { getDetail, Goods, Shop } from 'network/detail'
 import { itemImageListener, backTopMixin } from "common/mixin"
 import { debounce } from "common/utils"
 
+import { mapActions } from 'vuex'
+
 export default {
   name: 'Detail',
   components: {
@@ -78,6 +80,7 @@ export default {
     this.$bus.$off('itemImageLoad', this.imageListener)
   },
   methods: {
+    ...mapActions(['addCart']),
     getDetail() {
       getDetail(this.id).then(res => {
         const result = res.result
@@ -118,7 +121,8 @@ export default {
       product.desc = this.goods.desc
       product.price = this.goods.realPrice
       product.id = this.id
-      this.$store.dispatch('addCart', product)
+      // this.$store.dispatch('addCart', product)
+      this.addCart(product).then(res => console.log(res))
     }
   }
 }
