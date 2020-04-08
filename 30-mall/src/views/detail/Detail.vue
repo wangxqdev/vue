@@ -118,7 +118,7 @@ export default {
       product.desc = this.goods.desc
       product.price = this.goods.realPrice
       product.id = this.id
-      this.$store.commit('addCart', product)
+      this.$store.dispatch('addCart', product)
     }
   }
 }
