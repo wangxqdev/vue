@@ -122,7 +122,7 @@ export default {
       product.price = this.goods.realPrice
       product.id = this.id
       // this.$store.dispatch('addCart', product)
-      this.addCart(product).then(res => console.log(res))
+      this.addCart(product).then(res => this.$toast.show(res, 1500))
     }
   }
 }
