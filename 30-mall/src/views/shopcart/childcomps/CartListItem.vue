@@ -1,7 +1,7 @@
 <template>
   <div class="list-item">
     <div class="item-select">
-      <check-button></check-button>
+      <check-button :is-active="goods.isActive" @click.native="checkBtnClick"></check-button>
     </div>
     <div class="item-img">
       <img :src="goods.image" alt="">
@@ -40,7 +40,12 @@ export default {
     fullCount(count) {
       return `x${count}`
     }
-  }
+  },
+  methods: {
+    checkBtnClick() {
+      this.goods.isActive = !this.goods.isActive
+    }
+  },
 }
 </script>
 
